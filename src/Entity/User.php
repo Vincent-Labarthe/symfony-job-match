@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -46,6 +48,16 @@ class User
      * @ORM\Column(type="string", )
      */
     private $jobLove;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\JobApplication", mappedBy="user")
+     */
+    private $jobApplications;
+
+    public function __construct()
+    {
+        $this->jobApplications = new ArrayCollection();
+    }
 
     /**
      * Get the value of id
@@ -171,6 +183,34 @@ class User
     public function setEmail($email)
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|JobApplication[]
+     */
+    public function getJobApplications(): Collection
+    {
+        return $this->jobApplications;
+    }
+
+    public function addJobApplication(JobApplication $jobApplication): self
+    {
+        if (!$this->jobApplications->contains($jobApplication)) {
+            $this->jobApplications[] = $jobApplication;
+            $jobApplication->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeJobApplication(JobApplication $jobApplication): self
+    {
+        if ($this->jobApplications->contains($jobApplication)) {
+            $this->jobApplications->removeElement($jobApplication);
+            $jobApplication->removeUser($this);
+        }
 
         return $this;
     }
