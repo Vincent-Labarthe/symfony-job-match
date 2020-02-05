@@ -40,6 +40,11 @@ class User
     private $email;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    private $password;
+
+    /**
      * @ORM\Column(type="date")
      */
     private $birthdate;
@@ -213,5 +218,13 @@ class User
         }
 
         return $this;
+    }
+
+    /**
+     * Get the value of password
+     */
+    public function getPassword()
+    {
+        return $this->password;
     }
 }
