@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <div class="home-wrapper d-flex justify-content-center">
+    <div class="align-self-center">
+      <h1 class="mb-3">
+        Job-Tinder
+      </h1>
+      <div  class="text-center">
+        <h5>Find your love job</h5>
+        <a class="btn btn-outline-secondary" href="{{ path('applicant_login') }}">Espace Candidat</a>
+         <a class="btn btn-outline-secondary" href="">Espace Recruteur</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}

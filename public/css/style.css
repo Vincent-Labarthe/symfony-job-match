@@ -1,0 +1,29 @@
+.home-wrapper {
+    height: 100vh;
+}
+
+.home-wrapper h1{
+    font-weight: 200;
+    font-size: 84px;
+    color:#636b6f;
+    border-bottom: 2px solid;
+}
+
+.home-wrapper h5{
+    font-weight: 200;
+    color:#636b6f;
+    margin:1em;
+}
+
+.home-wrapper a{
+    margin:1em 2em;
+    }
+
+.home-wrapper a:hover{
+background-color: #636b6f;
+}
+
+.login-wrapper{
+    height: 100vh;
+
+}
