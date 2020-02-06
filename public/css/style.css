@@ -23,6 +23,13 @@
 background-color: #636b6f;
 }
 
+.home-love{
+    background-image:url("../image/love.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+
+}
+
 .login-wrapper{
     height: 100vh;
 
@@ -35,3 +42,4 @@ background-color: #636b6f;
     color:#fff;
     background-color: #636b6f;
 }
+

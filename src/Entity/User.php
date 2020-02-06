@@ -42,7 +42,7 @@ class User
     /**
      * @ORM\Column(type="string")
      */
-    private $password;
+    private $plainPassword;
 
     /**
      * @ORM\Column(type="date")
@@ -220,11 +220,25 @@ class User
         return $this;
     }
 
+    
+
     /**
-     * Get the value of password
-     */
-    public function getPassword()
+     * Get the value of plainPassword
+     */ 
+    public function getPlainPassword()
     {
-        return $this->password;
+        return $this->plainPassword;
+    }
+
+    /**
+     * Set the value of plainPassword
+     *
+     * @return  self
+     */ 
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
+
+        return $this;
     }
 }

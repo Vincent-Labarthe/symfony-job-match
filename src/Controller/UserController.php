@@ -3,20 +3,24 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserController extends AbstractController
 {
     /**
      * @Route("/applicant/login", name="applicant_login")
      */
-    public function candidateSignUp()
+    public function candidateSignUp(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
 
         $newUser = new User();
@@ -55,6 +59,25 @@ class UserController extends AbstractController
             ]
         ]);
 
+        $formBuilder->add(
+            'plainPassword',
+            RepeatedType::class,
+            array(
+                "type" => PasswordType::class,
+                'first_options' => array(
+                    'label' => 'Mot de passe', "attr" => [
+                        "class" => "form-group form-control"
+                    ]
+                ),
+                'second_options' => array(
+                    'label' => 'Repetez mot de passe',   "attr" => [
+                        "class" => "form-group form-control"
+                    ]
+                ),
+            ),
+        );
+
+
         $formBuilder->add('birthdate', BirthdayType::class, [
             "label" => "date de naissance",
             "attr" => [
@@ -78,6 +101,20 @@ class UserController extends AbstractController
         ]);
 
         $form = $formBuilder->getForm();
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $password= $passwordEncoder->encodePassword($newUser, $newUser->getPlainPassword());
+            $newUser->setPlainPassword($password);
+
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($newUser);
+            $manager->flush();
+            $this->addFlash("success", "Votre compte a bien été créé");
+
+            return $this->redirectToRoute("applicant_login");
+        }
 
         return $this->render("user/login.html.twig", [
             "formView" => $form->createView()

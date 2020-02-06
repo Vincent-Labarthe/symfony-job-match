@@ -39,7 +39,7 @@ class JobApplication
     private $stack;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\recruiter", inversedBy="jobApplications")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Recruiter", inversedBy="jobApplications")
      * @ORM\JoinColumn(nullable=false)
      */
     private $recruiter;
