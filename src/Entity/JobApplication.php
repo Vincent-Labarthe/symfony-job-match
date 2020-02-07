@@ -49,9 +49,15 @@ class JobApplication
      */
     private $user;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="JobApplication")
+     */
+    private $users;
+
     public function __construct()
     {
         $this->user = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -143,5 +149,13 @@ class JobApplication
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
     }
 }

@@ -2,19 +2,19 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
-class User
+class User implements UserInterface
 {
-
     /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -30,46 +30,133 @@ class User
     private $lastname;
 
     /**
-     * @ORM\Column(type="string", )
+     * @ORM\Column(type="string", length=255)
      */
     private $gender;
-
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=180, unique=true)
      */
     private $email;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="json")
      */
-    private $plainPassword;
+    private $roles = ['user'];
 
     /**
      * @ORM\Column(type="date")
      */
     private $birthdate;
-
-    /**
-     * @ORM\Column(type="string", )
+    
+/**
+     * @ORM\Column(type="string", length=255)
      */
     private $jobLove;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\JobApplication", mappedBy="user")
+     * @var string The hashed password
+     * @ORM\Column(type="string")
      */
-    private $jobApplications;
+    private $password;
 
-    public function __construct()
+    public function getId(): ?int
     {
-        $this->jobApplications = new ArrayCollection();
+        return $this->id;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
     }
 
     /**
-     * Get the value of id
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
      */
-    public function getId()
+    public function getUsername(): string
     {
-        return $this->id;
+        return (string) $this->email;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+     public function getPassword(): string
+    {
+        return (string) $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getSalt()
+    {
+        // not needed when using the "bcrypt" algorithm in security.yaml
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
+
+
+    /**
+     * Get the value of lastname
+     */
+    public function getLastname()
+    {
+        return $this->lastname;
+    }
+
+    /**
+     * Set the value of lastname
+     *
+     * @return  self
+     */
+    public function setLastname($lastname)
+    {
+        $this->lastname = $lastname;
+
+        return $this;
     }
 
     /**
@@ -93,28 +180,8 @@ class User
     }
 
     /**
-     * Get the value of lastname
-     */
-    public function getLastname()
-    {
-        return $this->lastname;
-    }
-
-    /**
-     * Set the value of lastname
-     *
-     * @return  self
-     */
-    public function setLastname($lastname)
-    {
-        $this->lastname = $lastname;
-
-        return $this;
-    }
-
-    /**
      * Get the value of gender
-     */
+     */ 
     public function getGender()
     {
         return $this->gender;
@@ -124,7 +191,7 @@ class User
      * Set the value of gender
      *
      * @return  self
-     */
+     */ 
     public function setGender($gender)
     {
         $this->gender = $gender;
@@ -134,7 +201,7 @@ class User
 
     /**
      * Get the value of birthdate
-     */
+     */ 
     public function getBirthdate()
     {
         return $this->birthdate;
@@ -144,7 +211,7 @@ class User
      * Set the value of birthdate
      *
      * @return  self
-     */
+     */ 
     public function setBirthdate($birthdate)
     {
         $this->birthdate = $birthdate;
@@ -154,7 +221,7 @@ class User
 
     /**
      * Get the value of jobLove
-     */
+     */ 
     public function getJobLove()
     {
         return $this->jobLove;
@@ -164,80 +231,10 @@ class User
      * Set the value of jobLove
      *
      * @return  self
-     */
+     */ 
     public function setJobLove($jobLove)
     {
         $this->jobLove = $jobLove;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of email
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * Set the value of email
-     *
-     * @return  self
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|JobApplication[]
-     */
-    public function getJobApplications(): Collection
-    {
-        return $this->jobApplications;
-    }
-
-    public function addJobApplication(JobApplication $jobApplication): self
-    {
-        if (!$this->jobApplications->contains($jobApplication)) {
-            $this->jobApplications[] = $jobApplication;
-            $jobApplication->addUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeJobApplication(JobApplication $jobApplication): self
-    {
-        if ($this->jobApplications->contains($jobApplication)) {
-            $this->jobApplications->removeElement($jobApplication);
-            $jobApplication->removeUser($this);
-        }
-
-        return $this;
-    }
-
-    
-
-    /**
-     * Get the value of plainPassword
-     */ 
-    public function getPlainPassword()
-    {
-        return $this->plainPassword;
-    }
-
-    /**
-     * Set the value of plainPassword
-     *
-     * @return  self
-     */ 
-    public function setPlainPassword($plainPassword)
-    {
-        $this->plainPassword = $plainPassword;
 
         return $this;
     }

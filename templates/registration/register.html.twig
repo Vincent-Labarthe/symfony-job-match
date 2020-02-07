@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  {% for label, messages in app.flashes %}
+    {% for message in messages %}
+      <div class="alert alert-{{ label }}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endfor %}
+  <div class="login-wrapper d-flex justify-content-center">
+    <div class="sign-up col-4 align-self-center">
+      <h2 class="text-center">
+         Sign Up  
+      </h2>
+      {{ form(formView) }}
+    </div>
+
+    <div class="col-4 align-self-center">
+      <h2 class="text-center">
+       <a href="{{ path('app_login') }}"> Sign In</a>  
+      </h2>
+ 
+    </div>
+  </div>
+{% endblock %}
