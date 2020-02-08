@@ -2,7 +2,7 @@
 
 
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand" href="#">Mon Profil</a>
+		<a class="navbar-brand" href="#"> Welcome {{user.firstname}} {{user.lastname}}</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -13,8 +13,6 @@
 				</li>
 			</ul>
 			<ul class="navbar-nav ml-auto">
-      				<span class="nav-link">Welcome {{user.firstname}} {{user.lastname}}</span>
-
 				<li class="nav-item">
 					<a class="nav-link" href="{{path('app_logout')}}">Se déconnecter</a>
 				</li>

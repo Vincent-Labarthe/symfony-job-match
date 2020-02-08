@@ -54,6 +54,12 @@ class User implements UserInterface
     private $jobLove;
 
     /**
+     * @ORM\Column (type="string", nullable=true)
+     */
+    private $profilPicture;
+
+
+    /**
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
@@ -235,6 +241,26 @@ class User implements UserInterface
     public function setJobLove($jobLove)
     {
         $this->jobLove = $jobLove;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of profilPicture
+     */ 
+    public function getProfilPicture()
+    {
+        return $this->profilPicture;
+    }
+
+    /**
+     * Set the value of profilPicture
+     *
+     * @return  self
+     */ 
+    public function setProfilPicture($profilPicture)
+    {
+        $this->profilPicture = $profilPicture;
 
         return $this;
     }

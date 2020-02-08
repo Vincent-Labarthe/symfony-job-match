@@ -2,18 +2,35 @@
 
 
 {% block body %}
-<h1 class="text-center user-home ">Find your love Job</h1>
+	<h1 class="text-center user-home ">Find your love Job</h1>
 
-{{include('include/_navbar.html.twig')}}
-  <div class="home-wrapper d-flex justify-content-center">
-    <div class="test align-self-center">
-      <div class="home-love">
-      </div>
-        
-        <div class="text-center">
-        <h4>Welcome</h4>
-          <h5>{{user.firstname}} {{user.lastname}}</h5>
-        </div>
-    </div>
-  </div>
-{% endblock %}
+	{{include('include/_navbar.html.twig')}}
+	<div class="card m-3" style="max-width: 540px;">
+		<div class="row no-gutters">
+			<div class="col-md-4">
+				<img src="{{ asset('uploads/pictures/' ~ user.profilPicture) }}" class="card-img" alt="...">
+			</div>
+			<div class="col-md-8">
+				<div class="card-body">
+					<h5 class="card-title">Card title</h5>
+					<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+					<a href="#" id="upload-button" class="btn btn-primary">Changer de photo de profil</a>
+					<div id="upload-image" class="d-none">
+						{{ form(formView) }}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endblock %}
+
+	{% block javascripts %}
+		<script>
+    console.log('test')
+			$("#upload-button").click(function () {
+          $("#upload-image").addClass("d-block");
+          $("#upload-button").addClass("d-none")
+
+      });
+		</script>
+	{% endblock %}
