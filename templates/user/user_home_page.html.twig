@@ -7,14 +7,18 @@
 	{{include('include/_navbar.html.twig')}}
 	<div class="card m-3" style="max-width: 540px;">
 		<div class="row no-gutters">
-			<div class="col-md-4">
-				<img src="{{ asset('uploads/pictures/' ~ user.profilPicture) }}" class="card-img" alt="...">
+			<div class="col-md-4 d-flex">
+				<img src="{{ asset('uploads/pictures/' ~ user.profilPicture) }}" class="card-img align-self-center" alt="...">
 			</div>
 			<div class="col-md-8">
 				<div class="card-body">
-					<h5 class="card-title">Card title</h5>
-					<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-					<a href="#" id="upload-button" class="btn btn-primary">Changer de photo de profil</a>
+					<h5 class="card-title text-center">Mon profil</h5>
+					<ul>
+          <li class="list-group-item">Email : {{user.email}}</li>
+          <li class="list-group-item">Date de naissance : {{user.birthdate|date('d-m-Y')}}</li>
+          <li class="list-group-item">Job recherché : {{user.jobLove}}</li>
+          </ul>
+					<a href="#" id="upload-button" class="text-center btn btn-primary">Changer de photo de profil</a>
 					<div id="upload-image" class="d-none">
 						{{ form(formView) }}
 						</div>
@@ -26,11 +30,16 @@
 
 	{% block javascripts %}
 		<script>
-    console.log('test')
-			$("#upload-button").click(function () {
-          $("#upload-image").addClass("d-block");
-          $("#upload-button").addClass("d-none")
-
-      });
+			console.log('test')
+$("#upload-button").click(function () {
+$("#upload-image").addClass("d-block");
+$("#upload-button").addClass("d-none")
+});
+$(document).on('keyup',function(evt) {
+    if (evt.keyCode == 27) {
+      $("#upload-image").removeClass("d-block");
+$("#upload-button").removeClass("d-none");
+    }
+});
 		</script>
 	{% endblock %}
