@@ -1,18 +1,19 @@
 {% extends 'base.html.twig' %}
 
+
 {% block body %}
+<h1 class="text-center user-home ">Find your love Job</h1>
+
+{{include('include/_navbar.html.twig')}}
   <div class="home-wrapper d-flex justify-content-center">
     <div class="test align-self-center">
       <div class="home-love">
       </div>
-        <h1 class="mb-3">
-          Job-Tinder
-        </h1>
+        
         <div class="text-center">
         <h4>Welcome</h4>
           <h5>{{user.firstname}} {{user.lastname}}</h5>
         </div>
-      <a href="{{path('app_logout')}}">Se déconnecter</a>
     </div>
   </div>
 {% endblock %}

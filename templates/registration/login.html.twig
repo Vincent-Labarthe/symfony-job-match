@@ -1,13 +1,24 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-     <form method="post">
+  <div class="sign-wrapper d-flex justify-content-center">
+    <div class=" col-4 align-self-center">
+     {% for label, messages in app.flashes %}
+    {% for message in messages %}
+      <div class="text-center alert alert-{{ label }}">
+        {{ message }}
+      </div>
+    {% endfor %}
+      {% endfor %}
+
+        <h2 class="text-center">Se connecter</h2>
+      <form method="post">
         {% if error %}
           <div class="alert alert-danger">
             {{ error.messageKey|trans(error.messageData, 'security') }}
           </div>
         {% endif %}
-      
+
         <label for="inputEmail" class="sr-only">
           Email
         </label>
@@ -33,11 +44,10 @@
           name="_csrf_token"
           value="{{ csrf_token('authenticate') }}" />
 
-     
-    
-
         <button class="form-group form-control sign-up-button" type="submit">
           Sign in
         </button>
       </form>
+    </div>
+  </div>
 {% endblock %}

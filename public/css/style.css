@@ -23,23 +23,24 @@
 background-color: #636b6f;
 }
 
-.home-love{
-    background-image:url("../image/love.svg");
-    background-repeat: no-repeat;
-    background-position: center;
 
-}
 
-.login-wrapper{
+.sign-wrapper{
     height: 100vh;
 
 }
-
 .sign-up{
-    border-right: 2px solid #636b6f;
+    border-right: #636b6f 2px solid;
 }
+
 .sign-up-button{
     color:#fff;
     background-color: #636b6f;
 }
 
+.user-home{
+    font-weight: 200;
+    font-size: 84px;
+    color:#636b6f;
+    margin:0.5em;
+}
