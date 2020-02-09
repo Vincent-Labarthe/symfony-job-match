@@ -61,7 +61,7 @@ if ($this->isGranted('IS_AUTHENTICATED_FULLY')) {
     }
 
    /**
-     * @Route("/logout", name="user_logout", methods={"GET"})
+     * @Route("/user/logout", name="user_logout", methods={"GET"})
      */
     public function userLogout()
     {

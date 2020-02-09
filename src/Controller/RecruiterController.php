@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Controller;
 
@@ -10,20 +10,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 
-class RecruiterController extends AbstractController{
-/**
-     * @Route("/recruiter", name="recruiter_page" )
+class RecruiterController extends AbstractController
+{
+    /**
+     **@Route("/recruiter/{id}", name="recruiter_page", requirements={"id":"\d+"})
      */
-    public function recruiterPage()
+    public function recruiterPage(Request $request, Recruiter $recruiter)
     {
-
-       
-
-            
-            return $this->redirectToRoute('recruiter_page');
-        }
-
-        
-   
-
+        return $this->render(
+            'recruiter/recruiter_home_page.html.twig'
+        );
+    }
 }

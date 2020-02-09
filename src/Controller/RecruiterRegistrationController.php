@@ -67,7 +67,7 @@ class RecruiterRegistrationController extends AbstractController
      /**
      * @Route("/login", name="recruiter_login")
      * Route de Sign In 
-     
+     */
     public function recruiterLogin(AuthenticationUtils $authenticationUtils): Response
     {
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -78,5 +78,5 @@ class RecruiterRegistrationController extends AbstractController
         'error' => $error
         ]);
     }
-    */
+    
 }

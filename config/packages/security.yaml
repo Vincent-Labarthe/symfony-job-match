@@ -8,26 +8,50 @@ security:
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
+        chain_provider:
+            chain:
+                providers: [app_user_provider, app_recruiter_provider]
         # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
             entity:
                 class: App\Entity\User
+                property: email
+
+        app_recruiter_provider:
+            entity:
+                class: App\Entity\Recruiter
                 property: email
                 
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        main:
+            
+        user:
+            pattern: ^/user/
+            provider: app_user_provider
             anonymous: lazy
             guard:
                 authenticators:
                     - App\Security\User\LoginFormAuthenticator
-
+            logout:
+                    path: /user/logout
+                    target: /      
+        recruiter:
+            pattern: ^/recruiter/
+            provider: app_recruiter_provider
+            anonymous: lazy
+            guard:
+                authenticators:
+                    - App\Security\Recruiter\LoginFormAuthenticator
             logout:
                     path: /logout
                     target: /
- 
+                    invalidate_session: false
+
+            
+
+            
 
            
             # activate different ways to authenticate
