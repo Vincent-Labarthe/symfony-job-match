@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -57,6 +58,14 @@ class User implements UserInterface
      * @ORM\Column (type="string", nullable=true)
      */
     private $profilPicture;
+
+    /**
+     * @ORM\Column (type="integer")
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 2)
+     */
+    private $adress;
 
 
     /**
@@ -261,6 +270,26 @@ class User implements UserInterface
     public function setProfilPicture($profilPicture)
     {
         $this->profilPicture = $profilPicture;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of adress
+     */ 
+    public function getAdress()
+    {
+        return $this->adress;
+    }
+
+    /**
+     * Set the value of adress
+     *
+     * @return  self
+     */ 
+    public function setAdress($adress)
+    {
+        $this->adress = $adress;
 
         return $this;
     }

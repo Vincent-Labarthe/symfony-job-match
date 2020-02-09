@@ -1,20 +1,40 @@
 {% extends 'base.html.twig' %}
 
-{% block body %} {% for label, messages in app.flashes %}
-    {% for message in messages %}
-        <div class="alert alert-{{ label }}">
-            {{ message }}
-        </div>
-    {% endfor %}
-{% endfor %}
-  <div class="login-wrapper d-flex justify-content-center ">
-    <div class="sign-up col-4 align-self-center">
-    <h2 class="text-center">Sign Up</h2>
-     {{form(formView)}}
-    </div>
+{% block body %}
+<!--Sign In-->
+	<div class="sign-wrapper d-flex justify-content-center">
+		<div class=" col-4 align-self-center">
+			{% for label, messages in app.flashes %}
+				{% for message in messages %}
+					<div class="text-center alert alert-{{ label }}">
+						{{ message }}
+					</div>
+				{% endfor %}
+			{% endfor %}
 
-    <div class="col-4 align-self-center">
-      
-    </div>
-  </div>
+			<h2 class="text-center">Se connecter</h2>
+			<form method="post">
+				{% if error %}
+					<div class="alert alert-danger">
+						{{ error.messageKey|trans(error.messageData, 'security') }}
+					</div>
+				{% endif %}
+
+				<label for="inputEmail" class="sr-only">
+					Email
+				</label>
+				<input type="email" value="" name="email" id="inputEmail" class="form-control m-2" placeholder="Email" required autofocus/>
+				<label for="inputPassword" class="sr-only">
+					Password
+				</label>
+				<input type="password" name="password" id="inputPassword" class="form-control m-2" placeholder="Mot de passe" required/>
+
+				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+
+				<button class="form-group form-control sign-up-button" type="submit">
+					Sign in
+				</button>
+			</form>
+		</div>
+	</div>
 {% endblock %}

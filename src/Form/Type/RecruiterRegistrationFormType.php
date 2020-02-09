@@ -2,25 +2,22 @@
 
 namespace App\Form\Type;
 
-use App\Entity\User;
+use App\Entity\Recruiter;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 /**
  * Form de sign up
  */
-class RegistrationFormType extends AbstractType
+class RecruiterRegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -48,33 +45,18 @@ class RegistrationFormType extends AbstractType
                 "attr" => [
                     "class" => "form-group form-control"
                 ],
-            ])->add('firstname', TextType::class, [
-                "label" => "Prénom",
+            ])->add('companyName', TextType::class, [
+                "label" => "Société",
                 "attr" => [
                     "class" => "form-group form-control"
                 ]
-            ])->add('lastname', TextType::class, [
-                "label" => "Nom",
+            ])->add('contactName', TextType::class, [
+                "label" => "Nom du contact",
                 "attr" => [
                     "class" => "form-group form-control"
                 ]
-            ])->add('gender', ChoiceType::class, [
-                "choices" => [
-                    'Homme' => 'male',
-                    "Femme" => 'female'
-                ],
-                "label" => "Genre",
-                "attr" => [
-                    "class" => "form-group form-control"
-                ]
-            ])->add('birthdate', BirthdayType::class, [
-                "label" => "date de naissance",
-                "attr" => [
-                    "class" => "form-group form-control"
-                ],
-                "widget" => "single_text"
-            ])->add('jobLove', TextType::class, [
-                "label" => "Jod de rêve",
+            ])->add('adress', IntegerType::class, [
+                "label" => "Département",
                 "attr" => [
                     "class" => "form-group form-control"
                 ]
@@ -90,7 +72,7 @@ class RegistrationFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => User::class,
+            'data_class' => Recruiter::class,
         ]);
     }
 }

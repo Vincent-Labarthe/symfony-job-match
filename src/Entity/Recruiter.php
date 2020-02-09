@@ -2,14 +2,18 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity()
+ * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
-class Recruiter
+class Recruiter implements UserInterface
 {
 
     /**
@@ -29,16 +33,22 @@ class Recruiter
      */
     private $email;
 
-     /**
+    /**
+     * @var string The hashed password
      * @ORM\Column(type="string")
      */
     private $password;
+
+/**
+     * @ORM\Column(type="json")
+     */
+    private $roles = ['recruiter'];
 
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $city;
+    private $adress;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -88,7 +98,7 @@ class Recruiter
 
     /**
      * Get the value of id
-     */ 
+     */
     public function getId()
     {
         return $this->id;
@@ -96,7 +106,7 @@ class Recruiter
 
     /**
      * Get the value of contactName
-     */ 
+     */
     public function getContactName()
     {
         return $this->contactName;
@@ -106,7 +116,7 @@ class Recruiter
      * Set the value of contactName
      *
      * @return  self
-     */ 
+     */
     public function setContactName($contactName)
     {
         $this->contactName = $contactName;
@@ -114,29 +124,10 @@ class Recruiter
         return $this;
     }
 
-    /**
-     * Get the value of city
-     */ 
-    public function getCity()
-    {
-        return $this->city;
-    }
-
-    /**
-     * Set the value of city
-     *
-     * @return  self
-     */ 
-    public function setCity($city)
-    {
-        $this->city = $city;
-
-        return $this;
-    }
 
     /**
      * Get the value of password
-     */ 
+     */
     public function getPassword()
     {
         return $this->password;
@@ -144,7 +135,7 @@ class Recruiter
 
     /**
      * Get the value of email
-     */ 
+     */
     public function getEmail()
     {
         return $this->email;
@@ -154,7 +145,7 @@ class Recruiter
      * Set the value of email
      *
      * @return  self
-     */ 
+     */
     public function setEmail($email)
     {
         $this->email = $email;
@@ -164,7 +155,7 @@ class Recruiter
 
     /**
      * Get the value of companyName
-     */ 
+     */
     public function getCompanyName()
     {
         return $this->companyName;
@@ -174,11 +165,93 @@ class Recruiter
      * Set the value of companyName
      *
      * @return  self
-     */ 
+     */
     public function setCompanyName($companyName)
     {
         $this->companyName = $companyName;
 
         return $this;
     }
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+     /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUsername(): string
+    {
+        return (string) $this->email;
+    }
+
+
+    /**
+     * Set the hashed password
+     *
+     * @param  string  $password  The hashed password
+     *
+     * @return  self
+     */ 
+    public function setPassword(string $password)
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of adress
+     */ 
+    public function getAdress()
+    {
+        return $this->adress;
+    }
+
+    /**
+     * Set the value of adress
+     *
+     * @return  self
+     */ 
+    public function setAdress($adress)
+    {
+        $this->adress = $adress;
+
+        return $this;
+    }
+
+    
+    /**
+     * @see UserInterface
+     */
+    public function getSalt()
+    {
+        // not needed when using the "bcrypt" algorithm in security.yaml
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
 }

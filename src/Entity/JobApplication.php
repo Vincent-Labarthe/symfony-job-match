@@ -45,7 +45,7 @@ class JobApplication
     private $recruiter;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\user", inversedBy="jobApplications")
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="jobApplications")
      */
     private $user;
 

@@ -1,5 +1,5 @@
 <?php
-namespace App\Security;
+namespace App\Security\User;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -41,7 +41,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function supports(Request $request)
     {
-        return 'app_login' === $request->attributes->get('_route')
+        return 'user_login' === $request->attributes->get('_route')
             && $request->isMethod('POST');
     }
 
@@ -97,6 +97,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     protected function getLoginUrl()
     {
-        return $this->router->generate('app_login');
+        return $this->router->generate('user_login');
     }
 }

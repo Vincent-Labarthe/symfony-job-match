@@ -2,7 +2,10 @@
 
 
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand" href="#"> Welcome {{user.firstname}} {{user.lastname}}</a>
+		<a class="navbar-brand" href="#">
+			Welcome
+			{{user.firstname}}
+			{{user.lastname}}</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -11,13 +14,23 @@
 				<li class="nav-item">
 					<a class="nav-link" href="#">Mes recherches</a>
 				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Mes candidatures</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Les annonces</a>
+				</li>
+
 			</ul>
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item">
-					<a class="nav-link" href="{{path('app_logout')}}">Se déconnecter</a>
+					<a class="nav-link" href="{{path('user_logout')}}">Se déconnecter</a>
 				</li>
 			</ul>
-
+			<form class="form-inline my-2 my-lg-0">
+				<input class="form-control mr-sm-2" type="search" placeholder="Mot clé" aria-label="Search">
+				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher une annonce</button>
+			</form>
 		</div>
 	</nav>
 {% endblock %}

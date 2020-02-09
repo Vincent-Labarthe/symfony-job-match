@@ -1,17 +1,20 @@
 .home-wrapper {
     height: 100vh;
+    background: rgb(2,0,36);
+background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(9,22,121,1) 23%, rgba(0,82,255,1) 100%);
+
 }
 
 .home-wrapper h1{
     font-weight: 200;
     font-size: 84px;
-    color:#636b6f;
+    color:#476e38;
     border-bottom: 2px solid;
 }
 
 .home-wrapper h5{
     font-weight: 200;
-    color:#636b6f;
+    color:#476e38;
     margin:1em;
 }
 
@@ -20,11 +23,11 @@
     }
 
 .home-wrapper a:hover{
-background-color: #636b6f;
+background-color: #476e38;
 }
 
 .sign-wrapper a{
-color:#636b6f
+color:#476e38
 }
 
 

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+	<h1 class="text-center user-home ">Find your love Job</h1>
+
+	{{include('include/_navbar.html.twig')}}
+	<div class="card m-3" style="max-width: 540px;">
+		<div class="row no-gutters">
+			<div class="col-md-4 d-flex">
+				<img src="" class="card-img align-self-center" alt="...">
+			</div>
+			<div class="col-md-8">
+				<div class="card-body">
+					<h5 class="card-title text-center">Mon profil</h5>
+					<ul>
+						<li class="list-group-item">Email :
+							{{recruiter.email}}</li>
+
+					</ul>
+
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+	
+{% endblock %}
