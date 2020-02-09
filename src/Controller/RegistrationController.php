@@ -16,6 +16,7 @@ class RegistrationController extends AbstractController
 
     /**
      * @Route("/sign", name="user_sign")
+     * Route affichant le template du dispatch signIn/Up
      */
     public function userSign(){
 
@@ -24,6 +25,7 @@ class RegistrationController extends AbstractController
 
     /**
      * @Route("/register", name="app_register")
+     * Route de Sign Up
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
@@ -62,6 +64,7 @@ class RegistrationController extends AbstractController
 
     /**
      * @Route("/login", name="app_login")
+     * Route de Sign In 
      */
     public function login(AuthenticationUtils $authenticationUtils)
     {

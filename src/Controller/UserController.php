@@ -18,6 +18,7 @@ class UserController extends AbstractController
      */
     public function userPage(Request $request,User $user)
     {
+if ($this->isGranted('IS_AUTHENTICATED_FULLY')) {
 
         $form = $this->createForm(UploadType::class, $user);
         $form->handleRequest($request);
@@ -57,6 +58,8 @@ class UserController extends AbstractController
                 'user' => $user
             ]
         );
+    }
+    return $this->redirectToRoute('app_login');
     }
 
    /**
