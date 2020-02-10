@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Recruiter;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Form\Type\RecruiterRegistrationFormType;
@@ -29,7 +31,7 @@ class RecruiterRegistrationController extends AbstractController
      * @Route("/register", name="recruiter_register")
      * Route de Sign Up
      */
-    public function recruiterRegister(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
+    public function recruiterRegister(Request $request, UserPasswordEncoderInterface $passwordEncoder,MailerInterface $mailer): Response
     {
         $recruiter = new Recruiter();
         $form = $this->createForm(RecruiterRegistrationFormType::class, $recruiter);
@@ -43,7 +45,16 @@ class RecruiterRegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-
+            $email = (new Email())
+            ->from('v.labarthe@gmail.com')
+            ->to($recruiter->getEmail())
+            //->cc('cc@example.com')
+            //->bcc('bcc@example.com')
+            //->replyTo('fabien@example.com')
+            //->priority(Email::PRIORITY_HIGH)
+            ->subject('Job-Tinder')
+            ->text('Votre compte recruiter a bien été créé');
+        $mailer->send($email);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($recruiter);
             $entityManager->flush();    

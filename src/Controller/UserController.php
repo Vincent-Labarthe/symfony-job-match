@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\Type\UploadType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
@@ -13,6 +14,7 @@ class UserController extends AbstractController
 {
     /**
      * @Route("/user/{id}", name="user_page", requirements={"id":"\d+"})
+     *@IsGranted("ROLE_USER")
      */
     public function userPage(Request $request,User $user)
     {

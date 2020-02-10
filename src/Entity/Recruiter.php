@@ -39,10 +39,16 @@ class Recruiter implements UserInterface
      */
     private $password;
 
-/**
+    /**
      * @ORM\Column(type="json")
      */
-    private $roles = ['recruiter'];
+    private $roles = [];
+
+    /**
+     * @ORM\Column (type="string", nullable=true)
+     */
+    private $profilPicture;
+
 
 
     /**
@@ -54,6 +60,16 @@ class Recruiter implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $contactName;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\JobApplication", mappedBy="recruiter")
+     */
+    private $jobApplications;
+
+    public function __construct()
+    {
+        $this->jobApplications = new ArrayCollection();
+    }
 
 
     /**
@@ -139,7 +155,7 @@ class Recruiter implements UserInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        $roles[] = 'ROLE_RECRUITER';
 
         return array_unique($roles);
     }
@@ -151,7 +167,7 @@ class Recruiter implements UserInterface
         return $this;
     }
 
-     /**
+    /**
      * A visual identifier that represents this user.
      *
      * @see UserInterface
@@ -168,7 +184,7 @@ class Recruiter implements UserInterface
      * @param  string  $password  The hashed password
      *
      * @return  self
-     */ 
+     */
     public function setPassword(string $password)
     {
         $this->password = $password;
@@ -178,7 +194,7 @@ class Recruiter implements UserInterface
 
     /**
      * Get the value of adress
-     */ 
+     */
     public function getAdress()
     {
         return $this->adress;
@@ -188,7 +204,7 @@ class Recruiter implements UserInterface
      * Set the value of adress
      *
      * @return  self
-     */ 
+     */
     public function setAdress($adress)
     {
         $this->adress = $adress;
@@ -196,7 +212,7 @@ class Recruiter implements UserInterface
         return $this;
     }
 
-    
+
     /**
      * @see UserInterface
      */
@@ -214,4 +230,54 @@ class Recruiter implements UserInterface
         // $this->plainPassword = null;
     }
 
+    /**
+     * Get the value of profilPicture
+     */ 
+    public function getProfilPicture()
+    {
+        return $this->profilPicture;
+    }
+
+    /**
+     * Set the value of profilPicture
+     *
+     * @return  self
+     */ 
+    public function setProfilPicture($profilPicture)
+    {
+        $this->profilPicture = $profilPicture;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|JobApplication[]
+     */
+    public function getJobApplications(): Collection
+    {
+        return $this->jobApplications;
+    }
+
+    public function addJobApplication(JobApplication $jobApplication): self
+    {
+        if (!$this->jobApplications->contains($jobApplication)) {
+            $this->jobApplications[] = $jobApplication;
+            $jobApplication->setRecruiter($this);
+        }
+
+        return $this;
+    }
+
+    public function removeJobApplication(JobApplication $jobApplication): self
+    {
+        if ($this->jobApplications->contains($jobApplication)) {
+            $this->jobApplications->removeElement($jobApplication);
+            // set the owning side to null (unless already changed)
+            if ($jobApplication->getRecruiter() === $this) {
+                $jobApplication->setRecruiter(null);
+            }
+        }
+
+        return $this;
+    }
 }

@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\Entity\User;
 
+use Symfony\Component\Mime\Email;
 use App\Form\Type\UserRegistrationFormType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,7 +24,8 @@ class UserRegistrationController extends AbstractController
      * @Route("/sign", name="user_sign")
      * Route affichant le template du dispatch signIn/Up
      */
-    public function userSignDispatch(){
+    public function userSignDispatch()
+    {
 
         return $this->render("user/dispatch_sign.html.twig");
     }
@@ -31,7 +34,7 @@ class UserRegistrationController extends AbstractController
      * @Route("/register", name="user_register")
      * Route de Sign Up
      */
-    public function userRegister(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
+    public function userRegister(Request $request, UserPasswordEncoderInterface $passwordEncoder, MailerInterface $mailer): Response
     {
         $user = new User();
         $form = $this->createForm(UserRegistrationFormType::class, $user);
@@ -45,10 +48,20 @@ class UserRegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
+            $email = (new Email())
+                ->from('v.labarthe@gmail.com')
+                ->to($user->getEmail())
+                //->cc('cc@example.com')
+                //->bcc('bcc@example.com')
+                //->replyTo('fabien@example.com')
+                //->priority(Email::PRIORITY_HIGH)
+                ->subject('Job-Tinder')
+                ->text('Votre compte candidat a bien été créé');
+            $mailer->send($email);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
-            $entityManager->flush();    
+            $entityManager->flush();
             $this->addFlash(
                 'success',
                 'Votre compte a bien été crée'
@@ -56,13 +69,13 @@ class UserRegistrationController extends AbstractController
 
             // do anything else you need here, like send an email
 
-            return $this->redirectToRoute("app_login",);
+            return $this->redirectToRoute("user_login",);
         }
-        
+
 
         return $this->render("user/sign_up.html.twig", [
             "formView" => $form->createView(),
-            
+
         ]);
     }
 
@@ -75,9 +88,9 @@ class UserRegistrationController extends AbstractController
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render("user/login.html.twig",[
-        'last_username' => $lastUsername,
-        'error' => $error
+        return $this->render("user/login.html.twig", [
+            'last_username' => $lastUsername,
+            'error' => $error
         ]);
     }
 }

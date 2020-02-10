@@ -45,9 +45,8 @@ security:
                 authenticators:
                     - App\Security\Recruiter\LoginFormAuthenticator
             logout:
-                    path: /logout
+                    path: /recruiter/logout
                     target: /
-                    invalidate_session: false
 
             
 

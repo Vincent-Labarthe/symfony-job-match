@@ -2,6 +2,25 @@
 
 
 {% block body %}
-
+<h1 class="text-center user-home ">Trouvez le candidat idéal</h1>
+	{{include('include/_navbar_recruiter.html.twig')}}
+<div class="card m-3" style="max-width: 540px;">
+		<div class="row no-gutters">
+			<div class="col-md-4 d-flex">
+				<img src="" class="card-img align-self-center" alt="...">
+			</div>
+			<div class="col-md-8">
+				<div class="card-body">
+					<h5 class="card-title text-center">Le profil de la compagnie</h5>
+					<ul>
+          <li class="list-group-item">Email : </li>
+          </ul>
+					<a href="#" id="upload-button" class="text-center btn btn-primary">Changer de photo de profil</a>
+					<div id="upload-image" class="d-none">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 {% endblock %}
 
