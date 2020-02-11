@@ -7,10 +7,13 @@ use App\Entity\JobApplication;
 use App\Form\Type\JobApplicationType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 
+/**
+ * @IsGranted("ROLE_RECRUITER")
+ */
 class RecruiterController extends AbstractController
 {
     /**

@@ -2,3 +2,4 @@ easy_admin:
   entities:
     - App\Entity\Recruiter
     - App\Entity\User
+    - App\Entity\JobApplication

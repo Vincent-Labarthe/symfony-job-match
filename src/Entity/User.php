@@ -81,6 +81,10 @@ class User implements UserInterface
      */
     private $jobApplications;
 
+    public function __toString() {
+        return $this->getUsername();
+    }
+
     public function __construct()
     {
         $this->jobApplications = new ArrayCollection();

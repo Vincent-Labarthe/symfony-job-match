@@ -66,6 +66,12 @@ class Recruiter implements UserInterface
      */
     private $jobApplications;
 
+
+    public function __toString() {
+        return $this->getUsername();
+    }
+
+
     public function __construct()
     {
         $this->jobApplications = new ArrayCollection();
@@ -154,7 +160,6 @@ class Recruiter implements UserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_RECRUITER';
 
         return array_unique($roles);
