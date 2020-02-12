@@ -44,7 +44,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="json")
      */
-    private $roles = ['user'];
+    private $roles = [];
 
     /**
      * @ORM\Column(type="date")

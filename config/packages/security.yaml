@@ -1,5 +1,7 @@
 security:
     encoders:
+        App\Entity\Admin:
+            algorithm: auto
         App\Entity\User:
             algorithm: auto
         App\Entity\Recruiter:
@@ -10,7 +12,7 @@ security:
     providers:
         chain_provider:
             chain:
-                providers: [app_user_provider, app_recruiter_provider]
+                providers: [app_user_provider, app_recruiter_provider, app_admin_provider]
         # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
             entity:
@@ -21,6 +23,11 @@ security:
             entity:
                 class: App\Entity\Recruiter
                 property: email
+        
+        app_admin_provider:
+            entity:
+                class: App\Entity\Admin
+                property: email
                 
     firewalls:
         dev:
@@ -30,6 +37,7 @@ security:
         user:
             pattern: ^/user/
             provider: app_user_provider
+            anonymous: lazy
             guard:
                 authenticators:
                     - App\Security\User\LoginFormAuthenticator
@@ -39,18 +47,34 @@ security:
         recruiter:
             pattern: ^/recruiter/
             provider: app_recruiter_provider
+            anonymous: lazy
             guard:
                 authenticators:
                     - App\Security\Recruiter\LoginFormAuthenticator
             logout:
                     path: /recruiter/logout
                     target: /
+        admin:
+            pattern: ^/admin/
+            provider: app_admin_provider  
+            anonymous: false  
+            guard:
+                authenticators:
+                    - App\Security\Recruiter\LoginFormAuthenticator
+                    - App\Security\AdminLoginFormAuthenticator
+                entry_point: App\Security\AdminLoginFormAuthenticator
+            logout:
+                    path: /recruiter/logout
+                    target: /
+
+
         main:
-            anonymous: lazy   
+            anonymous: lazy  
+         
 
     access_control:
         # require ROLE_ADMIN for /admin*
-        - { path: '^/admin', roles: ROLE_ADMIN }
+        #- { path: '^/admin', roles: ROLE_ADMIN }
     
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }

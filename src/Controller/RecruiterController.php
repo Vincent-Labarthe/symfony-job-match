@@ -11,10 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
-/**
- * IsGranted("ROLE_RECRUITER")
- * @Route("/recruiter")
- */
+
 class RecruiterController extends AbstractController
 {
     /**
@@ -31,7 +28,7 @@ class RecruiterController extends AbstractController
     }
 
     /**
-     * @Route("/logout", name="recruiter_logout", methods={"GET"})
+     * @Route("/recruiter/logout", name="recruiter_logout", methods={"GET"})
      */
     public function recruiterLogout()
     {
