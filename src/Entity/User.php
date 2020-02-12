@@ -56,10 +56,17 @@ class User implements UserInterface
      */
     private $jobLove;
 
+
+    /**
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $skill;
+
     /**
      * @ORM\Column (type="string", nullable=true)
      */
     private $profilPicture;
+
 
     /**
      * @ORM\Column (type="integer")
@@ -334,6 +341,26 @@ class User implements UserInterface
             $this->jobApplications->removeElement($jobApplication);
             $jobApplication->removeUser($this);
         }
+
+        return $this;
+    }
+
+    /**
+     * Get the value of skill
+     */ 
+    public function getSkill()
+    {
+        return $this->skill;
+    }
+
+    /**
+     * Set the value of skill
+     *
+     * @return  self
+     */ 
+    public function setSkill($skill)
+    {
+        $this->skill = $skill;
 
         return $this;
     }

@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\Type\UploadType;
+use App\Form\Type\UserUpdateType;
+use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -11,11 +13,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
-
+/**
+ * @Route("/user")
+ */
 class UserController extends AbstractController
 {
     /**
-     * @Route("/user/{id}", name="user_page", requirements={"id":"\d+"})
+     * @Route("/home/{id}", name="user_page", requirements={"id":"\d+"})
      *@IsGranted("ROLE_USER")
      */
     public function userPage(Request $request, User $user, UserInterface $ConnectedUser)
@@ -23,6 +27,15 @@ class UserController extends AbstractController
 
         // Conditation permettant de vérifier que l'utilisateur va bien sur sa hoem page personnel
         if ($user === $ConnectedUser) {
+            $formUpdate = $this->createForm(UserUpdateType::class, $user);
+            $formUpdate->handleRequest($request);
+            if ($formUpdate->isSubmitted() && $formUpdate->isValid()) {
+                $manager = $this->getDoctrine()->getManager();
+                $manager->flush();
+                return $this->redirectToRoute('user_page', ['id' => $user->getId()]);
+            }
+
+
             $form = $this->createForm(UploadType::class, $user);
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
@@ -56,6 +69,7 @@ class UserController extends AbstractController
                 'user/user_home_page.html.twig',
                 [
                     "formView" => $form->createView(),
+                    "formUpdate" => $formUpdate->createView(),
                     'user' => $user
                 ]
             );
@@ -64,12 +78,34 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/user/logout", name="user_logout", methods={"GET"})
+     * @Route("/logout", name="user_logout", methods={"GET"})
      */
     public function userLogout()
     {
 
 
         throw new \Exception('Don\'t forget to activate logout in security.yaml');
+    }
+
+    /**
+     * @Route("/update/{id}", name="user_update")
+     */
+    public function userUpdate(Request $request, User $user)
+    {
+        $form = $this->createForm(UserRepository::class, $user);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager = $this->getDoctrine()->getManager();
+            $manager->flush();
+            return $this->redirectToRoute('user_page', ['id' => $user->getId()]);
+        }
+        return $this->render(
+            'user/udpate.html.twig',
+            [
+                "formView" => $form->createView(),
+                'user' => $user
+            ]
+        );
+
     }
 }
