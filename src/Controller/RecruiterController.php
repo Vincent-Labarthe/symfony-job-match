@@ -12,12 +12,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 /**
- * @IsGranted("ROLE_RECRUITER")
+ * IsGranted("ROLE_RECRUITER")
+ * @Route("/recruiter")
  */
 class RecruiterController extends AbstractController
 {
     /**
-     **@Route("/recruiter/{id}", name="recruiter_page", requirements={"id":"\d+"})
+     **@Route("/show/{id}", name="recruiter_page", requirements={"id":"\d+"})
      */
     public function recruiterPage(Recruiter $recruiter)
     {
@@ -30,7 +31,7 @@ class RecruiterController extends AbstractController
     }
 
     /**
-     * @Route("/recruiter/logout", name="recruiter_logout", methods={"GET"})
+     * @Route("/logout", name="recruiter_logout", methods={"GET"})
      */
     public function recruiterLogout()
     {

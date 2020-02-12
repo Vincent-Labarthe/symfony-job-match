@@ -30,7 +30,6 @@ security:
         user:
             pattern: ^/user/
             provider: app_user_provider
-            anonymous: lazy
             guard:
                 authenticators:
                     - App\Security\User\LoginFormAuthenticator
@@ -40,7 +39,6 @@ security:
         recruiter:
             pattern: ^/recruiter/
             provider: app_recruiter_provider
-            anonymous: lazy
             guard:
                 authenticators:
                     - App\Security\Recruiter\LoginFormAuthenticator
