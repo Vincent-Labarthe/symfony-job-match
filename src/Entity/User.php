@@ -56,11 +56,11 @@ class User implements UserInterface
      */
     private $jobLove;
 
-
+    
     /**
      * @ORM\Column(type="array", nullable=true)
      */
-    private $skill;
+    private $skill=[];
 
     /**
      * @ORM\Column (type="string", nullable=true)

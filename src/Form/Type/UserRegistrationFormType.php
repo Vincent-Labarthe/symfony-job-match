@@ -76,6 +76,22 @@ class UserRegistrationFormType extends AbstractType
                 "attr" => [
                     "class" => "form-group form-control"
                 ]
+            ])->add('skill', ChoiceType::class, [
+                "choices" => [
+                    'HTML5' => 'HTML5',
+                    "CSS3" => 'CSS3',
+                    'JS' => 'JS',
+                    "JQUERY" => 'JQUERY',
+                    'PHP' => 'PHP',
+                    "BOOTSTRAP" => 'BOOTSTRAP',
+                    'AJAX' => 'AJAX',
+                    "REACT" => 'REACT',
+                ],
+                "multiple"=>true,
+                "label" => "Compétence(s)",
+                "attr" => [
+                    "class" => "form-group form-control"
+                ]
             ])->add('adress', IntegerType::class, [
                 "label" => "Département",
                 "attr" => [

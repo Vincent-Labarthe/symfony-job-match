@@ -23,13 +23,15 @@
 								{{user.jobLove}}</li>
 							<li class="list-group-item">Mes compétences:
 								<ul>
-									<li>HTML5...</li>
+								{% for skill in user.skill %}
+									<li>{{skill}}</li>
+								{% endfor %}
 								</ul>
 							</li>
 						</ul>
-						<div class="text-center">
-							<a href="#" id="upload-button" class="text-center btn btn-primary col-4">Changer de photo de profil</a>
-							<a href="#" id="update-button" class="text-center btn btn-primary col-4">Modifier mon profil</a>
+						<div class="text-center ">
+							<a href="#" id="upload-button" class="text-center btn btn-primary col-5 ">Changer de photo de profil</a>
+							<a href="#" id="update-button" class="text-center btn btn-primary col-5">Modifier mon profil</a>
 						</div>
 						<div id="upload-image" class="d-none">
 							{{ form(formView) }}
@@ -51,30 +53,10 @@
 
 			<div class="card m-3 col-5  analyse-card" style="max-width: 740px;">
 				<div class="row no-gutters">
-					<div class="justify-content-center col-md-4 d-flex">
-						<img src="" class=" ml-3 card-img align-self-center" alt="...">
-					</div>
+					
 					<div class="col-md-8">
 						<div class="card-body justify-content-center">
-							<h5 class="card-title text-center">Datas</h5>
-							<ul>
-								<li class="list-group-item">Email :
-									{{user.email}}</li>
-								<li class="list-group-item">Date de naissance :
-									{{user.birthdate|date('d-m-Y')}}</li>
-								<li class="list-group-item">Job recherché :
-									{{user.jobLove}}</li>
-								<li class="list-group-item">Mes compétences:
-									<ul>
-										<li>HTML5...</li>
-									</ul>
-								</li>
-							</ul>
-							<div class="text-center">
-								<a href="#" id="upload-button" class="text-center btn btn-primary col-4">Changer de photo de profil</a>
-								<a href="#" id="upload-button" class="text-center btn btn-primary col-4">Modifier mon profil</a>
-							</div>
-
+							<h5 class="card-title text-center">Datas- En construction</h5>
 						</div>
 					</div>
 				</div>
