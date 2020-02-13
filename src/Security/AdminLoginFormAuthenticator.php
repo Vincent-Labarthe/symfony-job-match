@@ -67,6 +67,7 @@ class AdminLoginFormAuthenticator extends AbstractFormLoginAuthenticator
             // fail authentication with a custom error
             throw new CustomUserMessageAuthenticationException('Email could not be found.');
         }
+
         return $user;
     }
 
@@ -74,7 +75,7 @@ class AdminLoginFormAuthenticator extends AbstractFormLoginAuthenticator
     {
         // Check the user's password or other credentials and return true or false
         // If there are no credentials to check, you can just return true
-        return new RedirectResponse($this->router->generate('user_page',['id'=>$user->getId()]));
+        throw new \Exception('TODO: check the credentials inside '.__FILE__);
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
@@ -84,7 +85,7 @@ class AdminLoginFormAuthenticator extends AbstractFormLoginAuthenticator
         }
 
         // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
-        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        return new RedirectResponse($this->router->generate('user_page',['id'=>$user->getId()]));
     }
 
     protected function getLoginUrl()
