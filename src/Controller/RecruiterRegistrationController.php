@@ -57,7 +57,8 @@ class RecruiterRegistrationController extends AbstractController
         $mailer->send($email);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($recruiter);
-            $entityManager->flush();    
+            $entityManager->flush(); 
+               
             $this->addFlash(
                 'success',
                 'Votre compte a bien été crée'

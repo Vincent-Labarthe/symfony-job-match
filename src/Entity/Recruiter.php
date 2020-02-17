@@ -49,7 +49,10 @@ class Recruiter implements UserInterface
      */
     private $profilPicture;
 
-
+    /**
+     * @ORM\Column (type="string")
+     */
+    private $slug;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -67,7 +70,8 @@ class Recruiter implements UserInterface
     private $jobApplications;
 
 
-    public function __toString() {
+    public function __toString()
+    {
         return $this->getUsername();
     }
 
@@ -237,7 +241,7 @@ class Recruiter implements UserInterface
 
     /**
      * Get the value of profilPicture
-     */ 
+     */
     public function getProfilPicture()
     {
         return $this->profilPicture;
@@ -247,7 +251,7 @@ class Recruiter implements UserInterface
      * Set the value of profilPicture
      *
      * @return  self
-     */ 
+     */
     public function setProfilPicture($profilPicture)
     {
         $this->profilPicture = $profilPicture;
@@ -282,6 +286,26 @@ class Recruiter implements UserInterface
                 $jobApplication->setRecruiter(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * Get the value of slug
+     */ 
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set the value of slug
+     *
+     * @return  self
+     */ 
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
 
         return $this;
     }

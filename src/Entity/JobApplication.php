@@ -24,18 +24,23 @@ class JobApplication
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=3000)
+     * @ORM\Column(type="text")
      */
     private $description;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $adress;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $refId;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Recruiter", inversedBy="jobApplications")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $recruiter;
 
@@ -128,4 +133,24 @@ class JobApplication
         return $this;
     }
     
+
+    /**
+     * Get the value of refId
+     */ 
+    public function getRefId()
+    {
+        return $this->refId;
+    }
+
+    /**
+     * Set the value of refId
+     *
+     * @return  self
+     */ 
+    public function setRefId($refId)
+    {
+        $this->refId = $refId;
+
+        return $this;
+    }
 }
