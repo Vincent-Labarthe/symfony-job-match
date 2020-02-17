@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<ul>
+{% for job in joblist %}
+    <li>{{job.title}}</li>
+{% endfor %}
+</ul>
+{% endblock %}

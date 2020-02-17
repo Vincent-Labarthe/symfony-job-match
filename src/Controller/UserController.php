@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\JobApplication;
 use App\Entity\User;
 use App\Form\Type\UploadType;
 use App\Form\Type\UserUpdateType;
@@ -104,6 +105,24 @@ class UserController extends AbstractController
             [
                 "formView" => $form->createView(),
                 'user' => $user
+            ]
+        );
+
+    }
+
+    /**
+     * @Route("/job-list", name="job_lis_user")
+     */
+    public function showAnnonce(){
+        
+        $repository = $this->getDoctrine()->getRepository(JobApplication::class);
+
+        $jobList=$repository->findAll();
+        return $this->render(
+            'user/jobList.html.twig',
+            [
+                "joblist" => $jobList
+               
             ]
         );
 
