@@ -75,6 +75,9 @@ class JobApplicationUpdate extends Command
            $newJobApplication->setDescription($annonce['description']);
            $newJobApplication->setRefId($annonce['id']);
            $newJobApplication->setAdress(94);
+           $newJobApplication->setExperience($annonce['experienceLibelle']);
+           $newJobApplication->setContractType($annonce['typeContrat']);
+           $newJobApplication->setUrl($annonce['origineOffre']['urlOrigine']);
        
             $this->manager->persist($newJobApplication);
             $this->manager->flush();

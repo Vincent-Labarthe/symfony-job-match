@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\RecruiterController;
 
 use App\Entity\Recruiter;
 use App\Entity\JobApplication;
@@ -11,7 +11,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
-
+/**
+ * @Route("/recruiter")
+ */
 class RecruiterController extends AbstractController
 {
     /**
@@ -28,7 +30,7 @@ class RecruiterController extends AbstractController
     }
 
     /**
-     * @Route("/recruiter/logout", name="recruiter_logout", methods={"GET"})
+     * @Route("/logout", name="recruiter_logout", methods={"GET"})
      */
     public function recruiterLogout()
     {

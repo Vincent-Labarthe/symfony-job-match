@@ -8,8 +8,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\JobApplicationRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
-class JobApplication 
+class JobApplication
 {
     /**
      * @ORM\Id()
@@ -39,10 +40,38 @@ class JobApplication
     private $refId;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $experience;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $contractType;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $url;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Recruiter", inversedBy="jobApplications")
      * @ORM\JoinColumn(nullable=true)
      */
     private $recruiter;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreatedAt()
+    {
+        $this->createdAt = new \DateTime();
+    }
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="jobApplications")
@@ -132,11 +161,11 @@ class JobApplication
 
         return $this;
     }
-    
+
 
     /**
      * Get the value of refId
-     */ 
+     */
     public function getRefId()
     {
         return $this->refId;
@@ -146,11 +175,79 @@ class JobApplication
      * Set the value of refId
      *
      * @return  self
-     */ 
+     */
     public function setRefId($refId)
     {
         $this->refId = $refId;
 
         return $this;
+    }
+
+    /**
+     * Get the value of experience
+     */
+    public function getExperience()
+    {
+        return $this->experience;
+    }
+
+    /**
+     * Set the value of experience
+     *
+     * @return  self
+     */
+    public function setExperience($experience)
+    {
+        $this->experience = $experience;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of contractType
+     */
+    public function getContractType()
+    {
+        return $this->contractType;
+    }
+
+    /**
+     * Set the value of contractType
+     *
+     * @return  self
+     */
+    public function setContractType($contractType)
+    {
+        $this->contractType = $contractType;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of url
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * Set the value of url
+     *
+     * @return  self
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of createdAt
+     */ 
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
     }
 }

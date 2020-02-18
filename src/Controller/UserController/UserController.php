@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\UserController;
 
 use App\Entity\JobApplication;
 use App\Entity\User;
