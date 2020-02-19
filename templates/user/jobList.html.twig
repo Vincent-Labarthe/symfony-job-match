@@ -2,9 +2,19 @@
 
 
 {% block body %}
+	<h1 class="text-center user-home ">Trouvez le job de vos rêves</h1>
+
+    {{include('include/_navbar.html.twig')}}
+    <h2 class="ml-1"> {{joblist|length}} annonces :</h2>
 <ul>
 {% for job in joblist %}
     <li>{{job.title}}</li>
+    <ul>
+        <li>{{job.adress}}</li>
+        <li>{{job.contractType}}</li>
+        <li><a href="{{job.url}}">{{job.url}}</a></li>
+    </ul>
+<hr>
 {% endfor %}
 </ul>
 {% endblock %}

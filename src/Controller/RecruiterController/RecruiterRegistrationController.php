@@ -45,7 +45,7 @@ class RecruiterRegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-            $email = (new Email())
+           /* $email = (new Email())
             ->from('v.labarthe@gmail.com')
             ->to($recruiter->getEmail())
             //->cc('cc@example.com')
@@ -54,7 +54,7 @@ class RecruiterRegistrationController extends AbstractController
             //->priority(Email::PRIORITY_HIGH)
             ->subject('Job-Tinder')
             ->text('Votre compte recruiter a bien été créé');
-        $mailer->send($email);
+        $mailer->send($email);*/
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($recruiter);
             $entityManager->flush(); 

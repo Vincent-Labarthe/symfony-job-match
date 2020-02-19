@@ -49,7 +49,8 @@ class RegistrationFormType extends AbstractType
             ])->add('save', SubmitType::class, [
                 "label" => "S'enregistrer",
                 "attr" => [
-                    "class" => "form-group form-control sign-up-button"
+                    "class" => "form-group form-control sign-up-button",
+                    "style"=>"background-color: #BEEDFF"
                 ]
             ]);
     }

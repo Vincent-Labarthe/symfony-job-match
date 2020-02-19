@@ -111,9 +111,12 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/job-list", name="job_lis_user")
+     * @Route("/job-list", name="job_list_user")
      */
     public function showAnnonce(){
+        
+        $repository = $this->getDoctrine()->getRepository(User::class);
+        $user= $repository->find($this->getUser()->getId());
         
         $repository = $this->getDoctrine()->getRepository(JobApplication::class);
 
@@ -121,10 +124,12 @@ class UserController extends AbstractController
         return $this->render(
             'user/jobList.html.twig',
             [
-                "joblist" => $jobList
-               
+                "joblist" => $jobList,
+               "user"=>$user
             ]
         );
 
     }
+
+     
 }

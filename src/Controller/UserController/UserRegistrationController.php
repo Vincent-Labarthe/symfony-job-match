@@ -48,7 +48,7 @@ class UserRegistrationController extends AbstractController
                     $user,
                     $form->get('plainPassword')->getData()
                 )
-            );
+            );/*
             $email = (new Email())
                 ->from('v.labarthe@gmail.com')
                 ->to($user->getEmail())
@@ -58,7 +58,7 @@ class UserRegistrationController extends AbstractController
                 //->priority(Email::PRIORITY_HIGH)
                 ->subject('Job-Tinder')
                 ->text('Votre compte candidat a bien été créé');
-            $mailer->send($email);
+            $mailer->send($email);*/
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);

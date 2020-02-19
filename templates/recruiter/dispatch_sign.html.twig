@@ -3,19 +3,26 @@
 <!--template du dispatch signIn/Up-->
 
   <div class="sign-wrapper d-flex justify-content-center">
-    <div class="sign-up col-4 align-self-center">
-      <h2 class="text-center">
-        <a href="{{ path('recruiter_register') }}">Sign Up  </a> 
-      </h2>
-    
-    </div>
+		<div class="wrapper align-self-center m-5">
+			<a class="btn_wrap" href="{{ path('recruiter_register') }}">
+				<span id="span-home" class="text-center">Inscription</span>
+				<div class="container">
+					 Cliquez ici
+				</div>
+			</a>
+		</div>
+		<section class="justify-content-center d-flex">
 
-    <div class="col-4 align-self-center">
-      <h2 class="text-center">
-       <a href="{{ path('recruiter_login') }}"> Sign In</a>  
-      </h2>
- 
-    </div>
+			<div class="wrapper align-self-center m-5">
+				<a class="btn_wrap" href="{{ path('recruiter_login') }}">
+					<span id="span-home" class="text-center">Connexion</span>
+					<div class="container ">
+					Cliquez ici
+				</div>
+				</a>
+			</div>
+		</section>
+
   </div>
 {% endblock %}
  

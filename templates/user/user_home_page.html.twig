@@ -5,34 +5,38 @@
 	<h1 class="text-center user-home ">Trouvez le job de vos rêves</h1>
 
 	{{include('include/_navbar.html.twig')}}
-	<div class="wrapper d-flex justify-content-center mt-3">
-		<div class="card m-3 col-5 profil-card" style="max-width: 740px;">
+	<div class="wrapper d-flex  mt-3">
+		<div class="card-user card m-3 col-5 profil-card" style="max-width: 740px;">
 			<div class="row no-gutters">
-				<div class="justify-content-center col-md-4 d-flex">
+				<div class="justify-content-center flex-column col-md-4 d-flex">
 					<img src="{{ asset('uploads/pictures/' ~ user.profilPicture) }}" class=" ml-3 card-img align-self-center" alt="...">
+					<div class="text-center">
+						<a href="#" id="upload-button" class="mt-1 btn btn-primary" style="background-color:#BEEDFF; border:none">Changer de photo de profil</a>
+					</div>
 				</div>
+
 				<div class="col-md-8">
 					<div class="card-body justify-content-center">
 						<h5 class="card-title text-center">Mon profil</h5>
 						<ul>
-							<li class="list-group-item">Email :
+							<li class="list-group-item card-user">Email :
 								{{user.email}}</li>
-							<li class="list-group-item">Date de naissance :
+							<li class="list-group-item card-user">Date de naissance :
 								{{user.birthdate|date('d-m-Y')}}</li>
-							<li class="list-group-item">Job recherché :
+							<li class="list-group-item card-user">Job recherché :
 								{{user.jobLove}}</li>
-							<li class="list-group-item">Mes compétences:
+							<li class="list-group-item card-user">Mes compétences:
 								<ul>
-								{% for skill in user.skill %}
-									<li>{{skill}}</li>
-								{% endfor %}
+									{% for skill in user.skill %}
+										<li>{{skill}}</li>
+									{% endfor %}
 								</ul>
 							</li>
 						</ul>
-						<div class="text-center ">
-							<a href="#" id="upload-button" class="text-center btn btn-primary col-5 ">Changer de photo de profil</a>
-							<a href="#" id="update-button" class="text-center btn btn-primary col-5">Modifier mon profil</a>
-						</div>
+
+
+						<a href="#" id="update-button" class="text-center btn btn-primary col-5" style="background-color:#BEEDFF; border:none">Modifier mon profil</a>
+
 						<div id="upload-image" class="d-none">
 							{{ form(formView) }}
 							</div>
@@ -45,46 +49,37 @@
 				<div class="row no-gutters">
 					<div class="card-body justify-content-center">
 						<h5 class="card-title text-center">Modifier votre profil</h5>
-						<div id="udpate">{{ form(formUpdate) }}</div>
+						<div id="udpate">
+							{{ form(formUpdate) }}
+							</div>
 
-					</div>
-				</div>
-			</div>
-
-			<div class="card m-3 col-5  analyse-card" style="max-width: 740px;">
-				<div class="row no-gutters">
-					
-					<div class="col-md-8">
-						<div class="card-body justify-content-center">
-							<h5 class="card-title text-center">Datas- En construction</h5>
 						</div>
 					</div>
 				</div>
-			</div>
-		{% endblock %}
 
-		{% block javascripts %}
-		<script>
-			// script permettant d'uploader une image
-						$("#upload-button").click(function () {
-						$("#upload-image").addClass("d-block");
-						$("#upload-button").addClass("d-none")
-						});
-						
-						$(document).on('keyup', function (evt) {
-						if (evt.keyCode == 27) {
-						$("#upload-image").removeClass("d-block");
-						$("#upload-button").removeClass("d-none");
-						}
-						});
-						
-						// script permettant de modifier le profil
-						$("#update-button").click(function () {
-						$(".udpate-card ").removeClass("d-none");
-						$(".profil-card").addClass("d-none");
-				
-						});
-						
-						
-									</script>
-								{% endblock %}
+
+			{% endblock %}
+
+			{% block javascripts %}
+				<script>
+					// script permettant d'uploader une image
+$("#upload-button").click(function () {
+$("#upload-image").addClass("d-block");
+$("#upload-button").addClass("d-none")
+});
+
+$(document).on('keyup', function (evt) {
+if (evt.keyCode == 27) {
+$("#upload-image").removeClass("d-block");
+$("#upload-button").removeClass("d-none");
+}
+});
+
+// script permettant de modifier le profil
+$("#update-button").click(function () {
+$(".udpate-card ").removeClass("d-none");
+$(".profil-card").addClass("d-none");
+
+});
+				</script>
+			{% endblock %}

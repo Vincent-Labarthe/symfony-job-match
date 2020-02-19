@@ -1,8 +1,8 @@
 {% block navbar %}
 
 
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand" href="#">
+	<nav class="navbar navbar-expand-lg navbar-light">
+		<a class="navbar-brand" href="">
 			Bonjour
 			{{user.firstname}}
 			{{user.lastname}}</a>
@@ -18,7 +18,7 @@
 					<a class="nav-link" href="#">Mes candidatures</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="{{path('job_lis_user')}}">Les annonces</a>
+					<a class="nav-link" href="{{path('job_list_user')}}">Les annonces</a>
 				</li>
 
 			</ul>
