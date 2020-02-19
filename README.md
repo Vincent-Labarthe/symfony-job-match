@@ -3,5 +3,5 @@ Projet Portfolio
 
 ## Home Page
 
-![Demo](./image/homev2.gif)
+![Demo] (./image/homev2.gif)
 
