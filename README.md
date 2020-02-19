@@ -15,4 +15,4 @@ API consommé :  Offre d'emploi V2 (https://www.emploi-store-dev.fr/portail-deve
 
 Création d'une commande console avec tâche automatique quotidienne de mise à jour : 
 ![API Code Demo](public/image/api.gif)
-![BDD Relation Demo](public/image/BDD_relation.png)
+![BDD Relation Demo](public/image/BDD_relation.PNG)
