@@ -73,6 +73,7 @@ security:
          
 
     access_control:
+        - { path: ^/user/home, role:  ROLE_USER }
         # require ROLE_ADMIN for /admin*
         #- { path: '^/admin', roles: ROLE_ADMIN }
     

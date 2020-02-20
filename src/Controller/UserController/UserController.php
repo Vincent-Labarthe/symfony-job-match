@@ -2,9 +2,9 @@
 
 namespace App\Controller\UserController;
 
-use App\Entity\JobApplication;
 use App\Entity\User;
 use App\Form\Type\UploadType;
+use App\Entity\JobApplication;
 use App\Form\Type\UserUpdateType;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,6 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
  * @Route("/user")
@@ -35,7 +36,6 @@ class UserController extends AbstractController
                 $manager->flush();
                 return $this->redirectToRoute('user_page', ['id' => $user->getId()]);
             }
-
 
             $form = $this->createForm(UploadType::class, $user);
             $form->handleRequest($request);
@@ -89,7 +89,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/update/{id}", name="user_update")
+     * @Route("/update/{id}", name="user_update",requirements={"id":"\d+"})
      */
     public function userUpdate(Request $request, User $user)
     {
