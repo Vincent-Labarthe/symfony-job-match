@@ -2,7 +2,7 @@
     "type": "project",
     "license": "proprietary",
     "require": {
-        "php": "^7.2.5",
+        "php": "7.2.24",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "easycorp/easyadmin-bundle": "^2.3",
@@ -37,7 +37,6 @@
         "symfony/yaml": "5.0.*"
     },
     "require-dev": {
-        "deployer/deployer": "^6.7",
         "symfony/debug-pack": "*",
         "symfony/maker-bundle": "^1.0",
         "symfony/phpunit-bridge": "^5.0",
