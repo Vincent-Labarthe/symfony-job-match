@@ -1,0 +1,35 @@
+[localhost] > git rev-parse --abbrev-ref HEAD
+[localhost] < master
+[209.182.238.36] > echo $0
+[209.182.238.36] < [error] Permission denied, please try again.
+[209.182.238.36] < [error] Permission denied, please try again.
+[209.182.238.36] < [error] deployer@209.182.238.36: Permission denied (publickey,password).
+[Deployer\Exception\RuntimeException] The command "echo $0" failed.
+
+Exit Code: -1 (Unknown error)
+
+Host Name: 209.182.238.36
+
+================
+Permission denied, please try again.
+Permission denied, please try again.
+deployer@209.182.238.36: Permission denied (publickey,password).
+
+#0 C:\wamp64\www\Symfony\job-tinder\symfony-job-match\vendor\deployer\deployer\src\functions.php(304): Deployer\Ssh\Client->run(Object(Deployer\Host\Host), 'echo $0', Array)
+#1 C:\wamp64\www\Symfony\job-tinder\symfony-job-match\vendor\deployer\deployer\recipe\deploy\prepare.php(16): Deployer\run('echo $0')
+#2 [internal function]: Deployer\Deployer::Deployer\{closure}()
+#3 C:\wamp64\www\Symfony\job-tinder\symfony-job-match\vendor\deployer\deployer\src\Task\Task.php(105): call_user_func(Object(Closure))
+#4 C:\wamp64\www\Symfony\job-tinder\symfony-job-match\vendor\deployer\deployer\src\Executor\SeriesExecutor.php(60): Deployer\Task\Task->run(Object(Deployer\Task\Context))
+#5 C:\wamp64\www\Symfony\job-tinder\symfony-job-match\vendor\deployer\deployer\src\Console\TaskCommand.php(144): Deployer\Executor\SeriesExecutor->run(Array, Array)
+#6 C:\wamp64\www\Symfony\job-tinder\symfony-job-match\vendor\symfony\console\Command\Command.php(255): Deployer\Console\TaskCommand->execute(Object(Symfony\Component\Console\Input\ArgvInput), Object(Deployer\Console\Output\OutputWatcher))
+#7 C:\wamp64\www\Symfony\job-tinder\symfony-job-match\vendor\symfony\console\Application.php(925): Symfony\Component\Console\Command\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Deployer\Console\Output\OutputWatcher))
+#8 C:\wamp64\www\Symfony\job-tinder\symfony-job-match\vendor\deployer\deployer\src\Console\Application.php(133): Symfony\Component\Console\Application->doRunCommand(Object(Deployer\Console\TaskCommand), Object(Symfony\Component\Console\Input\ArgvInput), Object(Deployer\Console\Output\OutputWatcher))
+#9 C:\wamp64\www\Symfony\job-tinder\symfony-job-match\vendor\symfony\console\Application.php(265): Deployer\Console\Application->doRunCommand(Object(Deployer\Console\TaskCommand), Object(Symfony\Component\Console\Input\ArgvInput), Object(Deployer\Console\Output\OutputWatcher))
+#10 C:\wamp64\www\Symfony\job-tinder\symfony-job-match\vendor\symfony\console\Application.php(141): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#11 C:\wamp64\www\Symfony\job-tinder\symfony-job-match\vendor\deployer\deployer\src\Deployer.php(326): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#12 C:\wamp64\www\Symfony\job-tinder\symfony-job-match\vendor\deployer\deployer\bin\dep(135): Deployer\Deployer::run('v6.7.3', 'C:\\wamp64\\www\\S...')
+#13 {main}
+[209.182.238.36] > rm -f ~/webapps/Job-Maych-Portfolio/.dep/deploy.lock
+[209.182.238.36] < [error] Permission denied, please try again.
+[209.182.238.36] < [error] Permission denied, please try again.
+[209.182.238.36] < [error] deployer@209.182.238.36: Permission denied (publickey,password).
