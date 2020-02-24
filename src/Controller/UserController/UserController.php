@@ -7,6 +7,7 @@ use App\Form\Type\UploadType;
 use App\Entity\JobApplication;
 use App\Form\Type\UserUpdateType;
 use App\Repository\UserRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -113,19 +114,25 @@ class UserController extends AbstractController
     /**
      * @Route("/job-list", name="job_list_user")
      */
-    public function showAnnonce(){
+    public function showAnnonce( PaginatorInterface $paginator ,Request $request){
         
         $repository = $this->getDoctrine()->getRepository(User::class);
         $user= $repository->find($this->getUser()->getId());
         
         $repository = $this->getDoctrine()->getRepository(JobApplication::class);
-
         $jobList=$repository->findAll();
+
+        $pagination = $paginator->paginate(
+            $repository->findAll(),
+            $request->query->getInt('page', 1), /*page number*/
+            10 );
+            
         return $this->render(
             'user/jobList.html.twig',
             [
                 "joblist" => $jobList,
-               "user"=>$user
+               "user"=>$user,
+               'pagination' => $pagination
             ]
         );
 

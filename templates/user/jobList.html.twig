@@ -3,18 +3,38 @@
 
 {% block body %}
 	<h1 class="text-center user-home ">Trouvez le job de vos rêves</h1>
+	{{include('include/_navbar.html.twig')}}
+	<h2 class="m-3">
+		{{joblist|length}}
+		annonces trouvées</h2>
+	<table class="table mt-5">
+		<thead class="thead">
+			<tr>
+				<th class="thead-tr" scope="col">{{pagination|length}} annonces</th>
+				<th scope="col">Localisation</th>
+				<th scope="col">Type de contrat</th>
+				<th scope="col">Lien vers l'annonce</th>
+			</tr>
+		</thead>
+		{% for job in pagination %}
+			<tr {% if loop.index is odd %} class="color" {% endif %}>
+				<tbody></tbody>
+			</tr>
+			<tr>
+				<td>{{ job.title }}</td>
+				<td>{{ job.adress }}</td>
+				<td>{{ job.contractType }}</td>
+				<td>
+					<a href="{{job.url}}">{{job.url}}</a>
+				</td>
+			</tr>
+		</tbody>
 
-    {{include('include/_navbar.html.twig')}}
-    <h2 class="ml-1"> {{joblist|length}} annonces :</h2>
-<ul>
-{% for job in joblist %}
-    <li>{{job.title}}</li>
-    <ul>
-        <li>{{job.adress}}</li>
-        <li>{{job.contractType}}</li>
-        <li><a href="{{job.url}}">{{job.url}}</a></li>
-    </ul>
-<hr>
-{% endfor %}
-</ul>
+
+	{% endfor %}
+</table>
+{# display navigation #}
+<div class="navigation d-flex justify-content-center">
+	{{ knp_pagination_render(pagination) }}
+</div>
 {% endblock %}
