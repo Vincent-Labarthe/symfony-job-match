@@ -49,10 +49,7 @@ class Recruiter implements UserInterface
      */
     private $profilPicture;
 
-    /**
-     * @ORM\Column (type="string")
-     */
-    private $slug;
+
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -290,23 +287,5 @@ class Recruiter implements UserInterface
         return $this;
     }
 
-    /**
-     * Get the value of slug
-     */ 
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-
-    /**
-     * Set the value of slug
-     *
-     * @return  self
-     */ 
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
+    
 }

@@ -123,7 +123,7 @@ class UserController extends AbstractController
         $jobList=$repository->findAll();
 
         $pagination = $paginator->paginate(
-            $repository->findAll(),
+            $repository->findBy(array(), array('id'=>'desc')),
             $request->query->getInt('page', 1), /*page number*/
             10 );
             
