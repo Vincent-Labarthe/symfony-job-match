@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pwd
+{% endblock %}
+{% block body %}
+	<div class="sign-wrapper d-flex justify-content-center">
+		<div class="col-4 align-self-center">
+			<h1 class="h3 mb-3 font-weight-normal">Mot de passe oublié</h1>
+
+			<form method="POST" action="">
+				{% for message in app.flashes('warning') %}
+					<div class="alert-warning">
+						{{ message }}
+					</div>
+				{% endfor %}
+
+				<label for="inputEmail">Email</label>
+				<input type="email" value="" name="email" id="inputEmail" class="form-control" required autofocus>
+				<button class=" mt-2 btn btn-lg btn-primary" type="submit">
+					Envoyer
+				</button>
+
+			</form>
+		</div>
+	</div>
+{% endblock %}

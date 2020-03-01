@@ -21,6 +21,11 @@ class User implements UserInterface
      * @ORM\Column(type="integer")
      */
     private $id;
+     /**
+      * @var string le token qui servira lors de l'oubli de mot de passe
+     * @ORM\Column(type="string", unique=true, nullable=true)
+     */
+    private $resetToken;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -361,6 +366,32 @@ class User implements UserInterface
     public function setSkill($skill)
     {
         $this->skill = $skill;
+
+        return $this;
+    }
+
+    
+
+    /**
+     * Get le token qui servira lors de l'oubli de mot de passe
+     *
+     * @return  string
+     */ 
+    public function getResetToken()
+    {
+        return $this->resetToken;
+    }
+
+    /**
+     * Set le token qui servira lors de l'oubli de mot de passe
+     *
+     * @param  string  $resetToken  le token qui servira lors de l'oubli de mot de passe
+     *
+     * @return  self
+     */ 
+    public function setResetToken(string $resetToken)
+    {
+        $this->resetToken = $resetToken;
 
         return $this;
     }
