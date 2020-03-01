@@ -118,7 +118,7 @@ class UserController extends AbstractController
         
         $repository = $this->getDoctrine()->getRepository(User::class);
         $user= $repository->find($this->getUser()->getId());
-        
+  
         $repository = $this->getDoctrine()->getRepository(JobApplication::class);
         $jobList=$repository->findAll();
 

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+	<h1 class="text-center user-home ">Trouvez le job de vos rêves</h1>
+	{{include('include/_navbar.html.twig')}}
+	<h2 class="m-3">
+	Résultat de la recherche: {{joblist|length}} annonces trouvées</h2>
+    <ul>
+{% for job in joblist %}
+    <li><a href="{{job.url}}">{{job.title}}</a></li>
+    <hr>
+{% endfor %}       
+</ul>
+
+
+{% endblock %}
