@@ -19,22 +19,22 @@ class JobApplicationRepository extends ServiceEntityRepository
         parent::__construct($registry, JobApplication::class);
     }
 
-    // /**
-    //  * @return JobApplication[] Returns an array of JobApplication objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    
+    /**
+    * @return JobApplication[] Returns an array of JobApplication objects
+    */
+    public function findByTitle($value)
     {
         return $this->createQueryBuilder('j')
-            ->andWhere('j.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('j.id', 'ASC')
+            ->andWhere('j.title LIKE :searchterm')
+            ->setParameter('searchterm', '%'.$value.'%')
+            ->orderBy('j.id', 'DESC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+    
 
     /*
     public function findOneBySomeField($value): ?JobApplication
