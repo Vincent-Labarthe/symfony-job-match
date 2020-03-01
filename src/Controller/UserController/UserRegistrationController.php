@@ -1,5 +1,6 @@
 <?php
 
+//class permmettant la gestion de la connexion de l'utilisateur candidat
 namespace App\Controller\UserController;
 
 use App\Entity\User;
@@ -33,7 +34,7 @@ class UserRegistrationController extends AbstractController
 
     /**
      * @Route("/register", name="user_register")
-     * Route de Sign Up
+     * Route pour s'inscrire sur le site 
      */
     public function userRegister(Request $request, UserPasswordEncoderInterface $passwordEncoder, MailerInterface $mailer): Response
     {
@@ -48,7 +49,9 @@ class UserRegistrationController extends AbstractController
                     $user,
                     $form->get('plainPassword')->getData()
                 )
-            );/*
+            );
+            // si décommanté permet d'envoyer un email de confirmation 
+            /*
             $email = (new Email())
                 ->from('v.labarthe@gmail.com')
                 ->to($user->getEmail())
@@ -82,7 +85,7 @@ class UserRegistrationController extends AbstractController
 
     /**
      * @Route("/login", name="user_login")
-     * Route de Sign In 
+     * Route pour se connecter une fois inscrit
      */
     public function userLogin(AuthenticationUtils $authenticationUtils )
     {
