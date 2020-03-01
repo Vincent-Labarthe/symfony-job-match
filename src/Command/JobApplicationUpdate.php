@@ -9,9 +9,10 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+//Class permettant la mise à jour del BDD via requete à l'API
 class JobApplicationUpdate extends Command
 {
-
+    // déinifition du nom de la commande 
     protected static $defaultName = 'app:job:update';
 
     private $manager;
@@ -30,6 +31,7 @@ class JobApplicationUpdate extends Command
             ->setHelp('Cette commande n\'a pas besoin de parametres elle se debrouille toute seule');
     }
 
+    // appel à l'API pour générer un token.
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $client = HttpClient::create();
@@ -49,9 +51,11 @@ class JobApplicationUpdate extends Command
 
         );
         $content = $response->toArray();
+        //stockage du token 
         $token = $content['access_token'];
         dump($token);
 
+        // requete à l'API avec utilisation du token
         $response = $client->request(
             'GET',
             'https://api.emploi-store.fr/partenaire/offresdemploi/v2/offres/search?codeROME=M1805&departement=94&publieeDepuis=1',
@@ -67,37 +71,34 @@ class JobApplicationUpdate extends Command
             ]
         );
         $content = $response->toArray();
-        
-        
+
+        // stockage en Bdd des resultat obtenue
         foreach ($content['resultats'] as $annonce) {
             $newJobApplication = new JobApplication();
-        $newJobApplication->setTitle($annonce['intitule']);
-           $newJobApplication->setDescription($annonce['description']);
-           $newJobApplication->setRefId($annonce['id']);
-           $newJobApplication->setAdress(94);
-           $newJobApplication->setExperience($annonce['experienceLibelle']);
-           $newJobApplication->setContractType($annonce['typeContrat']);
-           $newJobApplication->setUrl($annonce['origineOffre']['urlOrigine']);
-       
+            $newJobApplication->setTitle($annonce['intitule']);
+            $newJobApplication->setDescription($annonce['description']);
+            $newJobApplication->setRefId($annonce['id']);
+            $newJobApplication->setAdress(94);
+            $newJobApplication->setExperience($annonce['experienceLibelle']);
+            $newJobApplication->setContractType($annonce['typeContrat']);
+            $newJobApplication->setUrl($annonce['origineOffre']['urlOrigine']);
+
             $this->manager->persist($newJobApplication);
             $this->manager->flush();
-            
         }
-        
 
 
-        /*$contentLenght=$content['resultats'];
-dump(count($contentLenght));*/
-$output->writeln([
-    'Intérrogationd de l\'api',
-    '============',
-    '',
-]);
-$output->writeln([
-    'Mise a jour de la base de donnée',
-    '============',
-    '',
-]);
+        // affichage en console des étapes
+        $output->writeln([
+            'Intérrogationd de l\'api',
+            '============',
+            '',
+        ]);
+        $output->writeln([
+            'Mise a jour de la base de donnée',
+            '============',
+            '',
+        ]);
 
         return 1;
     }

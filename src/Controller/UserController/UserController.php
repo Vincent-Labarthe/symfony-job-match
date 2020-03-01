@@ -1,5 +1,6 @@
 <?php
 
+//class permettant la gestion des actions de l'utilisateur
 namespace App\Controller\UserController;
 
 use App\Entity\User;
@@ -14,7 +15,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
  * @Route("/user")
