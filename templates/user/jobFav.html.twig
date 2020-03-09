@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<h1 class="text-center user-home ">Trouvez le job de vos rêves</h1>
+{{include('include/_navbar.html.twig')}}
+
+
+<ul>
+{% for job in joblist %}
+   <li>{{job.title}}</li> 
+{% endfor %}
+</ul>
+{% endblock %}

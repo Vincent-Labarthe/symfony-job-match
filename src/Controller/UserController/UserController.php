@@ -4,6 +4,8 @@
 namespace App\Controller\UserController;
 
 use App\Entity\User;
+use Symfony\Component\Security\Core\Security;
+
 use App\Form\Type\UploadType;
 use App\Entity\JobApplication;
 use App\Form\Type\UserUpdateType;
@@ -14,7 +16,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\Response as HttpFoundationResponse;
 
 /**
  * @Route("/user")
@@ -136,6 +140,38 @@ class UserController extends AbstractController
             ]
         );
 
+    }
+
+    /**
+     * @Route("/job-favorite/{id}", name="job_fav", methods="GET")
+     */
+    public function jobFavorite(JobApplication $jobApplication,Security $security): HttpFoundationResponse{
+
+        $user = $security->getUser();
+        $user->addJobApplication($jobApplication);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        return $this->redirectToRoute ('job_list_user')  ;    
+    }
+
+     /**
+     * @Route("/job-favorite-list", name="job_fav_list", methods="GET")
+     */
+    public function jobFavoriteList(Security $security){
+        $user = $security->getUser();
+        $jobList=$user->getJobApplications();
+        return $this->render(
+            'user/jobFav.html.twig',
+            [
+                "joblist" => $jobList,
+               "user"=>$user,
+              
+            ]
+        );
+        
     }
 
      

@@ -60,6 +60,11 @@ class JobApplication
      */
     private $recruiter;
 
+     /**
+     * @ORM\Column(type="boolean",nullable=true, options={"default":false})
+     */
+    private $status;
+
     /**
      * @ORM\Column(type="date")
      */
